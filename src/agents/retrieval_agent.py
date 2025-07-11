@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 @tool
 def query_nasa_api(query):
+    """Query NASA TechTransfer API for technology projects"""
     load_dotenv()
     nasa_api_key = os.getenv('NASA_API_KEY')
     nasa_url = f"https://api.nasa.gov/techtransfer/patents?query={query}&api_key={nasa_api_key}"
