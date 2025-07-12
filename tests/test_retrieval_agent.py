@@ -1,7 +1,20 @@
 import pytest
 import requests
+import logging
 
 from agents.retrieval_agent import query_nasa_api
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.propagate = True
+console_handler = logging.StreamHandler()
+formatter = logging.Formatter(
+    "{asctime} - {levelname} - {message}",
+    style="{",
+    datefmt="%Y-%m-%d %H:%M",
+)
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
 
 @pytest.fixture
 def mock_response():
@@ -17,6 +30,7 @@ def mock_response():
 
 @pytest.mark.integration
 def test_query_nasa_api_integration():
-    response = query_nasa_api.invoke("engine")
+    response = query_nasa_api.invoke("language")
+    logger.info(f"Response: {response}")
     assert isinstance(response, dict)
     assert "error" not in response
