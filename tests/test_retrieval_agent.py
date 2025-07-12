@@ -30,7 +30,7 @@ def mock_response():
 
 @pytest.mark.integration
 def test_query_nasa_api_integration():
-    response = query_nasa_api.invoke("language")
+    response = query_nasa_api.invoke("I want to know more about Mars tech projects")
     logger.info(f"Response: {response}")
     assert isinstance(response, dict)
     assert "error" not in response
