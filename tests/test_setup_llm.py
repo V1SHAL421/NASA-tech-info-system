@@ -1,8 +1,10 @@
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from src.utils.setup_llm import setup_openai_llm
 import pytest
+
 
 @pytest.mark.integration
 def test_setup_llm_succeeds(monkeypatch):
