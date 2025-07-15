@@ -58,10 +58,10 @@ if user_query:
                 node_messages = step[node]["messages"]
                 print(f"The step messages are {node_messages}")
                 last_message = node_messages[-1]
-                if hasattr(last_message, "content"):
-                    st.write(f"The agent says: {last_message.content}")
-                else:
-                    st.info(f"The last message is {last_message}")
+                if hasattr(last_message, "content") and node == "generate_query_with_context":
+                    st.write(f"{last_message.content}")
+                # else:
+                #     st.info(f"The last message is {last_message}")
 
-            else:
-                st.warning("No messages returned")
+            # else:
+            #     st.warning("No messages returned")
