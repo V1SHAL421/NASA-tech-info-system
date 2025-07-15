@@ -38,19 +38,30 @@ if user_query:
 
     config = {"configurable": {"thread_id": "1"}}
 
+    nodes = ["query_or_respond", "tools", "generate_query_with_context"]
+
     for step in app.stream(
         {
             "messages": [
                 (
                     "system",
-                    "You are a helpful assistant. You can use the tools to answer questions.",
+                    "You are a helpful NASA assistant. You can use the tools to answer questions.",
                 ),
                 ("human", user_query),
             ]
         },
         config=config,
     ):
-        if "messages" in step:
-            step["messages"][-1].pretty_print()
-        else:
-            st.warning("No messages returned")
+        print(f"Step entered: {step}")
+        for node in nodes:
+            if node in step and step[node]["messages"]:
+                node_messages = step[node]["messages"]
+                print(f"The step messages are {node_messages}")
+                last_message = node_messages[-1]
+                if hasattr(last_message, "content"):
+                    st.write(f"The agent says: {last_message.content}")
+                else:
+                    st.info(f"The last message is {last_message}")
+
+            else:
+                st.warning("No messages returned")
