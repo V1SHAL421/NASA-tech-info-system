@@ -1,7 +1,7 @@
 .PHONY: run test install lint freeze
 
 run:
-	python src/main.py
+	streamlit run /Users/vishal/Documents/NASA-tech-info-system/src/main.py
 
 test:
 	pytest tests/
