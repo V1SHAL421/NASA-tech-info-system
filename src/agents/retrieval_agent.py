@@ -1,14 +1,12 @@
 import requests
-import os
 from langchain_core.tools import tool
-from dotenv import load_dotenv
+import streamlit as st
 
 
 @tool
 def query_nasa_techtransfer_api(query):
     """Query NASA TechTransfer API for technology projects"""
-    load_dotenv()
-    nasa_tech_api_key = os.getenv("NASA_API_KEY")
+    nasa_tech_api_key = st.secrets.get("NASA_API_KEY")
     nasa_url = (
         f"https://api.nasa.gov/techtransfer/patent/?{query}&api_key={nasa_tech_api_key}"
     )
@@ -32,8 +30,7 @@ def query_nasa_techtransfer_api(query):
 @tool
 def query_nasa_images_api(query):
     """Query NASA Images and Video Library API"""
-    load_dotenv()
-    nasa_images_api_key = os.getenv("NASA_API_KEY")
+    nasa_images_api_key = st.secrets.get("NASA_API_KEY")
     nasa_url = (
         f"https://images-api.nasa/gov/search?q={query}&api_key={nasa_images_api_key}"
     )
