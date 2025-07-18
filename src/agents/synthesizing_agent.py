@@ -21,6 +21,8 @@ def generate_query_with_context(query: str, llm: ChatOpenAI):
         to answer
 
         {context}
+
+        For the structure of the output, I would like 3 paragraphs.
         """
         conversation_messages = [
             message
