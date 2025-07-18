@@ -21,13 +21,14 @@ def query_nasa_techtransfer_api(query):
         max_context_retrieved = 10
         if len(data) > max_context_retrieved:
             data = data[:max_context_retrieved]
-        
+
         print(f"The condensed data is {data}")
         data_summary = "\n".join(patent[summary_idx] for patent in data)
         return data_summary
     else:
         return {"error": f"Failed to fetch data. Status code: {response.status_code}"}
-    
+
+
 @tool
 def query_nasa_images_api(query):
     """Query NASA Images and Video Library API"""
@@ -47,6 +48,6 @@ def query_nasa_images_api(query):
             data_summary = "\n".join(patent for patent in data)
             return data_summary
         else:
-            return {"error": f"Failed to fetch data. Status code: {response.status_code}"}
-
-
+            return {
+                "error": f"Failed to fetch data. Status code: {response.status_code}"
+            }

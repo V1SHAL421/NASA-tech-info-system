@@ -19,7 +19,11 @@ if user_query:
     llm = setup_groq_llm()
     graph_builder = StateGraph(MessagesState)
     graph_builder.add_node(
-        "query_or_respond", query_or_respond(llm=llm, retrieval_tools=[query_nasa_images_api, query_nasa_techtransfer_api])
+        "query_or_respond",
+        query_or_respond(
+            llm=llm,
+            retrieval_tools=[query_nasa_images_api, query_nasa_techtransfer_api],
+        ),
     )
     graph_builder.add_node("tools", tools)
     graph_builder.add_node(
@@ -61,7 +65,10 @@ if user_query:
                 node_messages = step[node]["messages"]
                 print(f"The step messages are {node_messages}")
                 last_message = node_messages[-1]
-                if hasattr(last_message, "content") and node == "generate_query_with_context":
+                if (
+                    hasattr(last_message, "content")
+                    and node == "generate_query_with_context"
+                ):
                     st.write(f"{last_message.content}")
                 # else:
                 #     st.info(f"The last message is {last_message}")
