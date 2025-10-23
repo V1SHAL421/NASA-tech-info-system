@@ -1,4 +1,6 @@
 venv
+env
 .env
 *.pyc
-.streamlit/*
+src/.streamlit/secrets.toml
+.streamlit
